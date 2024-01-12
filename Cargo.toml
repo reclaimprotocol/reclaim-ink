@@ -1,0 +1,35 @@
+[package]
+name = "reclaim"
+version = "0.1.0"
+authors = ["Hadi Saleh <hadi@creatoros.co>"]
+edition = "2021"
+
+[dependencies]
+ink = { version = "4.2.0", default-features = false }
+
+scale = { package = "parity-scale-codec", version = "3", default-features = false, features = ["derive"] }
+scale-info = { version = "2.6", default-features = false, features = ["derive"], optional = true }
+
+sha2 = {version = "0.10.6", default-features = false}
+hex = {version = "0.4.3", default-features = false, features=["alloc"]}
+ecdsa = {version = "0.16.9", default-features = false}
+keccak-hash = {version = "0.10.0", default-features = false}
+
+k256 = {version = "0.13.3", default-features = false, features = ["ecdsa-core", "ecdsa", "sha256","schnorr"]}
+rand_core ={version = "0.6.4", default-features = false}
+
+[dev-dependencies]
+ink_e2e = "4.2.0"
+
+[lib]
+path = "lib.rs"
+
+[features]
+default = ["std"]
+std = [
+    "ink/std",
+    "scale/std",
+    "scale-info/std",
+]
+ink-as-dependency = []
+e2e-tests = []
