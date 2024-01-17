@@ -8,7 +8,7 @@ mod reclaim {
     use ink::prelude::vec::Vec;
     use ink::prelude::{format, vec};
     use ink::storage::Mapping;
-    use k256::ecdsa::{Signature, SigningKey, VerifyingKey};
+    use k256::ecdsa::{Signature, VerifyingKey};
     use keccak_hash::keccak256;
     use sha2::{Digest, Sha256};
 
@@ -305,6 +305,7 @@ mod reclaim {
     #[cfg(test)]
     mod tests {
         use ink::env::test::{default_accounts, DefaultAccounts};
+        use k256::ecdsa::SigningKey;
         use rand_core::OsRng;
 
         use super::*;
