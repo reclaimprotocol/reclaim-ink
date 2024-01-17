@@ -1,5 +1,7 @@
 #![cfg_attr(not(feature = "std"), no_std, no_main)]
 
+pub use reclaim::ReclaimRef;
+
 #[ink::contract]
 mod reclaim {
     use ecdsa::RecoveryId;
