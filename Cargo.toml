@@ -3,6 +3,12 @@ name = "reclaim"
 version = "0.1.0"
 authors = ["Hadi Saleh <hadi@creatoros.co>"]
 edition = "2021"
+license = "MIT OR Apache-2.0"
+description = "Implementation of the Reclaim Protocol in ink!."
+homepage = "https://github.com/reclaimprotocol/reclaim-ink/blob/main/README.md"
+repository = "https://github.com/reclaimprotocol/reclaim-ink"
+documentation = "https://github.com/reclaimprotocol/reclaim-ink/blob/main/README.md"
+readme = "README.md"
 
 [dependencies]
 ink = { version = "4.2.0", default-features = false }
