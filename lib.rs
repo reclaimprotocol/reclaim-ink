@@ -3,7 +3,7 @@
 pub use reclaim::ReclaimRef;
 
 #[ink::contract]
-mod reclaim {
+pub mod reclaim {
     use ecdsa::RecoveryId;
     use ink::prelude::string::String;
     use ink::prelude::string::ToString;
