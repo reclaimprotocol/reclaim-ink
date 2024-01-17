@@ -1,5 +1,5 @@
 [package]
-name = "reclaim"
+name = "reclaim-ink"
 version = "0.1.0"
 authors = ["Hadi Saleh <hadi@creatoros.co>"]
 edition = "2021"
