@@ -171,17 +171,17 @@ pub mod reclaim {
             selected_witness
         }
 
-        pub fn recover_raw_signature(signature: String) -> [u8; 64]{
+        pub fn recover_raw_signature(signature: String) -> [u8; 64] {
             let ss = signature.as_str();
-                let sss = &ss[28..156].to_lowercase();
-                let sss_str = sss.as_str();
-                let mut arr = [0_u8; 64];
-                for i in 0..64 {
-                    let ss = &sss_str[(2 * i)..(2 * i + 2)];
-                    let z = u8::from_str_radix(ss, 16).unwrap();
-                    arr[i] = z;
-                }
-                arr
+            let sss = &ss[28..156].to_lowercase();
+            let sss_str = sss.as_str();
+            let mut arr = [0_u8; 64];
+            for i in 0..64 {
+                let ss = &sss_str[(2 * i)..(2 * i + 2)];
+                let z = u8::from_str_radix(ss, 16).unwrap();
+                arr[i] = z;
+            }
+            arr
         }
     }
 
@@ -203,6 +203,11 @@ pub mod reclaim {
     #[ink(event)]
     pub struct ProofVerified {
         epoch_id: u128,
+    }
+
+    #[ink(event)]
+    pub struct WitnessRetrieved {
+        witness: Vec<String>,
     }
 
     #[ink(storage)]
@@ -282,6 +287,9 @@ pub mod reclaim {
             if expected_witness_addresses.len() != signed_witness.len() {
                 return Err(ReclaimError::LengthMismatch);
             }
+            Self::env().emit_event(WitnessRetrieved {
+                witness: signed_witness.clone(),
+            });
             for signed in signed_witness {
                 if !expected_witness_addresses.contains(&signed) {
                     return Err(ReclaimError::SignatureMismatch);
@@ -366,6 +374,7 @@ pub mod reclaim {
                 context: "context".to_string(),
             };
             let hashed = claim_info.hash();
+            dbg!(hex::encode(&hashed));
             let now = ink::env::block_timestamp::<ink::env::DefaultEnvironment>();
             let complete_claim_data = CompleteClaimData {
                 identifier: hashed,
@@ -389,6 +398,7 @@ pub mod reclaim {
                 claim: complete_claim_data,
                 bytes: sigs,
             };
+            dbg!(&signed_claim);
             assert_eq!(reclaim.verify_proof(claim_info, signed_claim), Ok(()));
         }
 
