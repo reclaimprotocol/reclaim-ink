@@ -4,7 +4,7 @@
 
 Build
 ```bash
-cargo +nightly-2023-02-07 contract build --release
+cargo contract build --release
 ```
 
 Test
